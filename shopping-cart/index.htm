@@ -11,6 +11,9 @@
 	<span>{{ item.price * item.quantity | currency }}</span>
 	<button ng-click="remove($index)">Remove</button>
 </div>
+<div>Total: {{ totalCart() | currency }}</div>
+<div>Discount: {{ discount }}</div>
+<div>SubCart: {{ subCart() | currency }}</div>
 <script type="text/javascript" src="../angular.js"></script>
 <script type="text/javascript">
 	function CartController($scope, $location) {
@@ -24,6 +27,27 @@
 		$scope.remove = function(index) {
 			$scope.items.splice(index, 1);
 		};
+
+		$scope.discount = 0;
+
+		$scope.totalCart = function() {
+			console.log(this);
+			var total = 0;
+			for (var i = 0, len = $scope.items.length; i < len; i++) {
+				total += $scope.items[i].price * $scope.items[i].quantity;
+			}
+			return total;
+		};
+
+		function calDiscount(newVal, oldVal, scope) {
+			$scope.discount = newVal > 100 ? 10 : 0;
+		};
+
+		$scope.subCart = function() {
+			return $scope.totalCart() - $scope.discount;
+		};
+
+		$scope.$watch($scope.totalCart, calDiscount);
 	}
 </script>
 </body>
