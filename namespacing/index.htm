@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>Namespace</title>
+</head>
+<body ng-controller="TextController">
+	<p>{{ message.text }}</p>
+<script type="text/javascript" src="../angular.js"></script>
+<script type="text/javascript">
+var app = angular.module('app', []);
+
+app.controller('TextController', function($scope) {
+	var message = {};
+	message.text = 'text body';
+	$scope.message = message;
+});
+</script>
+</body>
+</html>
