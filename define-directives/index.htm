@@ -1,0 +1,23 @@
+<html ng-app="app">
+<head>
+	<title></title>
+</head>
+<body>
+	<button>Not focused</button>
+	<button>Not focused</button>
+	<button ng-autofocus>I am very focused</button>
+	<button>Not focused</button>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('app', []);
+		app.directive('ngAutofocus', function() {	// Notice the name: ngAutofocus -> ng-autofocus
+			return {
+				link: function(scope, elements, attrs, controller) {
+					console.log('auto focus directive');
+					elements[0].focus();
+				}
+			};
+		});
+	</script>
+</body>
+</html>
