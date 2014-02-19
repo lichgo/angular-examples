@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>Filters</title>
+</head>
+<body ng-app="HomeModule" ng-controller="HomeController">
+<h1>{{ pageHeading | titleCase }}</h1>
+<script type="text/javascript" src="../angular.js"></script>
+<script type="text/javascript">
+var HomeModule = angular.module('HomeModule', []);
+HomeModule.filter('titleCase', function() {
+	// return a function
+	var titleCaseFilter = function(input) {
+		var words = input.split(' ');
+		for (var i = 0, len = words.length; i < len; i++) {
+			words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+		}
+		return words.join(' ');
+	};
+	return titleCaseFilter;
+});
+
+function HomeController($scope) {
+	$scope.pageHeading = 'this is a page.';
+}
+</script>
+</body>
+</html>
