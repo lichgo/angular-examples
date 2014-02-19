@@ -1,0 +1,30 @@
+<html ng-app="ShoppingModule"> 
+<head>
+	<title>Service</title>
+</head>
+<body ng-controller="ShoppingController">
+	<div ng-repeat="item in items">
+		<span>{{ item.title }}</span>
+	</div>
+</body>
+<script type="text/javascript" src="../angular.js"></script>
+<script type="text/javascript">
+var shoppingModule = angular.module('ShoppingModule', []);
+
+shoppingModule.factory('Items', function() {
+	var items = {};	// return this object as an instance
+	items.query = function() {
+		return [
+			{ title: 'Paint pots' },
+			{ title: 'Polka dots' },
+			{ title: 'Pebbles' }
+		];
+	};
+	return items;
+});
+
+function ShoppingController($scope, Items) {
+	$scope.items = Items.query();
+}
+</script>
+</html>
